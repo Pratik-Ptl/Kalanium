@@ -26,13 +26,10 @@
   --font-body: var(--font-body);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
   font-family: var(--font-body), 'DM Sans', sans-serif;
   background: var(--white);
   color: var(--bark);
-  overflow-x: hidden;
 }
 
 /* NAV */
@@ -87,12 +84,15 @@ nav {
 .animate-rotate-reverse { animation: rotate 20s linear infinite reverse; }
 .animate-scroll-pulse { animation: scrollPulse 2s ease-in-out infinite; }
 
-/* FADE UP */
+/* FADE UP - starts visible, JS adds animation class */
 .fade-up {
+  opacity: 1; transform: translateY(0);
+}
+.fade-up.animate {
   opacity: 0; transform: translateY(30px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.animate.visible { opacity: 1; transform: translateY(0); }
 
 /* DIVIDER */
 .divider {
