@@ -30,7 +30,14 @@ export async function middleware(request: NextRequest) {
   );
 
   // Refresh the auth token
-  await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  // Protect dashboard routes
+  if (request.nextUrl.pathname.startsWith("/dashboard") && !user) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/auth/sign-in";
+    return NextResponse.redirect(url);
+  }
 
   return supabaseResponse;
 }
